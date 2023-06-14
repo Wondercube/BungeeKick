@@ -1,5 +1,6 @@
 package me.vik1395.BungeeKick;
 
+import fr.xephi.authmebungee.AuthMeBungee;
 import net.md_5.bungee.api.AbstractReconnectHandler;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
@@ -36,6 +37,12 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onServerKickEvent(ServerKickEvent ev) 
     {
+    	
+    	// if player is not auth
+    	if (!AuthMeBungee.isPlayerAuthentificated(ev.getPlayer())) {    		
+    		return;
+    	}
+    	
         ServerInfo kickedFrom = null;
 
         if (ev.getPlayer().getServer() != null) 
